@@ -4,27 +4,43 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class Window
+public class Window extends JPanel
 {
     private static Random rng = new Random();
 
+    private Dimension size;
     private Point position;
-    private Dimension dimension;
     private Color color;
 
-    public Window(Dimension dimension)
+    public Window(Dimension size)
     {
-        this.dimension = dimension;
-        // this.color = new Color(rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
-        this.color = color.BLUE;
+        this.size = size;
+        position = new Point(rng.nextInt(size.width), rng.nextInt(size.height));
+        color = new Color(rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
     }
 
-    public void draw(Graphics gfx, JPanel panel)
+    public Dimension getSize()
     {
-         gfx.setColor(color);
-        gfx.drawRect(rng.nextInt(panel.getPreferredSize().width), rng.nextInt(panel.getPreferredSize().height), dimension.width, dimension.height);
-        gfx.drawRect(100, 100, 100,100);
-        panel.paint(gfx);
+        return size;
+    }
+    public Point getPosition()
+    {
+        return position;
+    }
+    public void setPosition(Point position)
+    {
+        this.position = position;
+    }
+    public Color getColor()
+    {
+        return color;
+    }
+
+    public void paintComponent(Graphics gfx)
+    {
+        super.paintComponent(gfx);
+        gfx.setColor(color);
+        gfx.fillRect(position.x, position.y, size.width, size.height);
     }
     public void click()
     {

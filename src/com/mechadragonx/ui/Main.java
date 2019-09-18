@@ -1,35 +1,35 @@
 package com.mechadragonx.ui;
 
-import com.sun.java.swing.plaf.motif.MotifBorders;
-
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
 
 public class Main
 {
-    public static void main(String[] args) {
-        {
-            JFrame mainFrame = new JFrame();
-            mainFrame.setLayout(new GridBagLayout());
-            mainFrame.setTitle("Windows");
-            //This line is needed to set the initial size of the window (i.e. JFrame)
-            mainFrame.setSize(new Dimension(1280,720));
-            JPanel panel = new JPanel(new GridBagLayout());
-            panel.setBackground(Color.RED);
-            mainFrame.setPreferredSize(new Dimension(1280, 720));
-            panel.setPreferredSize(new Dimension(1280, 720));
-           //This line is needed to set the size of the panel
-            panel.setSize(new Dimension(1280, 720));
-            panel.setVisible(true);
+    public static void main(String[] args)
+    {
+        JFrame mainFrame = new JFrame();
 
-            mainFrame.add(panel);
-            mainFrame.setVisible(true);
+        mainFrame.setSize(1000,1000);
+        mainFrame.setVisible(true);
 
+        Window window1 = new Window(new Dimension(200, 200));
+        window1.setSize(window1.getSize());
+        window1.setVisible(true);
 
-            Window window = new Window(new Dimension(100, 100));
-            window.draw(panel.getGraphics(), panel);
-        }
+        Window window2 = new Window(new Dimension(100, 100));
+        window2.setSize(window2.getSize());
+        // Explicitly set position, otherwise panel is added behind first one
+        window2.setPosition(window2.getPosition());
+        window2.setVisible(true);
+
+        Window window3 = new Window(new Dimension(300, 300));
+        window3.setSize(window3.getSize());
+        window3.setPosition(window3.getPosition());
+        window3.setVisible(true);
+
+        mainFrame.add(window1);
+        mainFrame.add(window2);
+        mainFrame.add(window3);
     }
 }
