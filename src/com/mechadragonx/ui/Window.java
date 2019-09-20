@@ -2,26 +2,21 @@ package com.mechadragonx.ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Random;
+import java.util.*;
 
-public class Window extends JPanel implements MouseListener
+public class Window
 {
     private static Random rng = new Random();
 
     private Dimension size;
-    private Point position;
     private Color color;
-    private boolean mouseEntered = false;
-    private boolean mouseDown = false;
+    private Point position;
 
     public Window(Dimension size)
     {
         this.size = size;
         position = new Point(rng.nextInt(size.width), rng.nextInt(size.height));
         color = new Color(rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
-       this.addMouseListener(this);
     }
 
     public Dimension getSize()
@@ -41,64 +36,16 @@ public class Window extends JPanel implements MouseListener
         return color;
     }
 
-    public void paintComponent(Graphics gfx)
+
+    public boolean pointInside(Point point)
     {
-        super.paintComponent(gfx);
-        gfx.setColor(color);
-        gfx.fillRect(position.x, position.y, size.width, size.height);
-    }
-
-    public boolean isMouseWithinComponent(Component c)
-    {
-        Point mousePos = MouseInfo.getPointerInfo().getLocation();
-        Rectangle bounds = c.getBounds();
-        bounds.setLocation(c.getLocationOnScreen());
-        return bounds.contains(mousePos);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e)
-    {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e)
-    {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e)
-    {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e)
-    {
-        mouseEntered = isMouseWithinComponent((Component) e.getSource());
-        if(mouseEntered)
+        if(point.x >= getPosition().x && point.x <= getPosition().x + getSize().width)
         {
-            System.out.println("in");
+            if(point.y >= getPosition().y && point.y <= getPosition().y + getSize().height)
+            {
+                return true;
+            }
         }
-        else
-        {
-            System.out.println("out");
-        }
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e)
-    {
-        mouseEntered = isMouseWithinComponent((Component) e.getSource());
-        if(mouseEntered)
-        {
-            System.out.println("in");
-        }
-        else
-        {
-            System.out.println("out");
-        }
+        return false;
     }
 }
