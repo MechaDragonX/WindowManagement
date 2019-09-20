@@ -1,22 +1,23 @@
 package com.mechadragonx.ui;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.util.Random;
 
 public class Window
 {
     private static Random rng = new Random();
 
-    private Dimension size;
     private Color color;
     private Point position;
+    private Dimension size;
 
     public Window(Dimension size)
     {
-        this.size = size;
-        position = new Point(rng.nextInt(size.width), rng.nextInt(size.height));
         color = new Color(rng.nextFloat(), rng.nextFloat(), rng.nextFloat());
+        position = new Point(rng.nextInt(size.width), rng.nextInt(size.height));
+        this.size = size;
     }
 
     public Dimension getSize()
